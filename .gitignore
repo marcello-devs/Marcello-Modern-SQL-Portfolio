@@ -1,0 +1,18 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# dbt
+marcello_modern_portfolio/target/
+marcello_modern_portfolio/dbt_packages/
+marcello_modern_portfolio/logs/
+
+# DuckDB database (generated locally)
+warehouse.duckdb
+*.duckdb
+*.duckdb.wal
+
+# OS / editor
+.DS_Store
+.vscode/

@@ -1,0 +1,4 @@
+customer_id,customer_name,email,city,updated_at
+1,Ana Silva,ana@example.com,London,2025-01-01
+1,Ana Silva,ana.silva@example.com,London,2025-02-15
+2,Marco Rossi,marco@example.com,Porto,2025-01-20
