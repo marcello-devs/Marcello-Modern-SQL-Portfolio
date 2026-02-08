@@ -1,0 +1,14 @@
+[sqlfluff]
+dialect = duckdb
+templater = dbt
+max_line_length = 120
+
+[sqlfluff:templater:dbt]
+project_dir = marcello_modern_portfolio
+profiles_dir = ~/.dbt
+
+# Portfolio-friendly relaxations:
+# - allow select * in staging (common)
+# - don't enforce "wildcards then targets" ordering
+[sqlfluff:rules:structure.column_order]
+ignore = True
