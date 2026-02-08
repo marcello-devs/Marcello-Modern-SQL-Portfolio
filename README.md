@@ -1,5 +1,9 @@
 # Marcello Modern SQL Portfolio (dbt + DuckDB)
 
+![dbt](https://img.shields.io/badge/dbt-Core-orange)
+![DuckDB](https://img.shields.io/badge/DuckDB-Local-yellow)
+![CI](https://github.com/marcello-devs/Marcello-Modern-SQL-Portfolio/actions/workflows/ci.yml/badge.svg)
+
 Modern, free SQL analytics engineering portfolio built with:
 - **dbt Core** (models, tests, docs)
 - **DuckDB** (local warehouse file)
@@ -30,3 +34,6 @@ dbt seed
 dbt build
 dbt docs generate
 dbt docs serve
+
+🔗 **Live dbt Docs (DAG & lineage)**  
+https://marcello-devs.github.io/Marcello-Modern-SQL-Portfolio/
