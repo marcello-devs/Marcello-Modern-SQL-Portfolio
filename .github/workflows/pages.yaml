@@ -1,0 +1,67 @@
+name: Publish dbt docs to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install dbt-core dbt-duckdb duckdb
+
+      - name: Create dbt profile (DuckDB)
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml << 'EOF'
+          marcello_modern_portfolio:
+            target: ci
+            outputs:
+              ci:
+                type: duckdb
+                path: "./warehouse_ci.duckdb"
+          EOF
+
+      - name: Build dbt docs
+        working-directory: marcello_modern_portfolio
+        run: |
+          dbt seed --target ci
+          dbt build --target ci
+          dbt docs generate --target ci
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: marcello_modern_portfolio/target
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
