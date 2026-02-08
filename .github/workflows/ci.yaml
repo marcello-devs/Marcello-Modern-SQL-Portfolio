@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  dbt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install dbt-core dbt-duckdb sqlfluff sqlfluff-templater-dbt duckdb
+
+      - name: Create dbt profile (DuckDB)
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml << 'EOF'
+          marcello_modern_portfolio:
+            target: ci
+            outputs:
+              ci:
+                type: duckdb
+                path: "./warehouse_ci.duckdb"
+          EOF
+
+      - name: SQLFluff lint
+        run: |
+          sqlfluff lint marcello_modern_portfolio/models --dialect duckdb
+
+      - name: dbt seed + build
+        working-directory: marcello_modern_portfolio
+        run: |
+          dbt seed --target ci
+          dbt build --target ci
