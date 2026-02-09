@@ -1,10 +1,10 @@
 # Marcello Modern SQL Portfolio
 
+[![Docs](https://img.shields.io/badge/dbt%20Docs-Live-brightgreen)](https://marcello-devs.github.io/Marcello-Modern-SQL-Portfolio/)
 ![dbt](https://img.shields.io/badge/dbt-Core-orange)
 ![DuckDB](https://img.shields.io/badge/DuckDB-Local-yellow)
 ![CI](https://img.shields.io/github/actions/workflow/status/marcello-devs/Marcello-Modern-SQL-Portfolio/ci.yml?branch=main)
-[![Docs](https://img.shields.io/badge/dbt%20Docs-Live-brightgreen)](https://marcello-devs.github.io/Marcello-Modern-SQL-Portfolio/)
-![Last Updated](https://img.shields.io/github/last-commit/marcello-devs/Marcello-Modern-SQL-Portfolio?label=Last%20Updated)
+![Last Updated](https://img.shields.io/github/last-commit/marcello-devs/Marcello-Modern-SQL-Portfolio)
 
 ## Overview
 
